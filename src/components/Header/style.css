@@ -1,0 +1,16 @@
+.nav-container {
+  height: 100px;
+  background-color: var(--main-blue);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  padding: 1rem;
+  list-style-type: none;
+}
+
+.nav-link a {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  color: var(--main-yellow);
+  text-decoration: none;
+}
