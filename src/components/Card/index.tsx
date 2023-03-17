@@ -8,6 +8,10 @@ export class Card extends Component<ICardProps> {
   render() {
     const { children } = this.props;
 
-    return <div className="card-container">{children}</div>;
+    return (
+      <div className="card-container" data-testid="card">
+        {children}
+      </div>
+    );
   }
 }

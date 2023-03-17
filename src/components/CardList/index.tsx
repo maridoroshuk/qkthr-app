@@ -19,8 +19,10 @@ export class CardList extends Component {
             <Card key={id}>
               <CardImage image={image} alt={title} />
               <CardContent>
-                <h3>{title}</h3>
-                <h6 className="card-second-heading">{author}</h6>
+                <h3 data-testid={`${id}-card-title`}>{title}</h3>
+                <h6 data-testid={`${id}-card-author`} className="card-second-heading">
+                  {author}
+                </h6>
                 <p>{body}</p>
               </CardContent>
               <CardActions>
