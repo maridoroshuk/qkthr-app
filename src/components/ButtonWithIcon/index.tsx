@@ -9,7 +9,7 @@ export class ButtonWithIcon extends Component<IButtonWithIcon> {
     const { children, icon, onButtonClick } = this.props;
 
     return (
-      <button className="icon-button" onClick={onButtonClick}>
+      <button className="icon-button" type="button" onClick={onButtonClick}>
         {children}
         <span className="icon-button-icon" style={{ backgroundImage: `url(${icon})` }}></span>
       </button>
