@@ -14,14 +14,14 @@ export function ErrorPage() {
         <h1>Oops!</h1>
         <h2>{error.status}</h2>
         <p>{error.statusText}</p>
-        <img className="error-image" src={Tulpen} />
+        <img className="error-image" src={Tulpen} alt="tulpen" />
       </div>
     );
   } else {
     return (
       <div className="error-container">
         <h1>Unexpected Application Error!</h1>
-        <img className="error-image" src={Tulpen} />
+        <img className="error-image" src={Tulpen} alt="tulpen" />
       </div>
     );
   }
