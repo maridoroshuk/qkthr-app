@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
 import SearchIcon from '@/assets/icons/search.png';
-import { InputGroup } from '@/components//InputGroup';
-import { Input } from '@/components/Input';
-
-import { InputLeftElement } from '../InputLeftElement';
+import { InputGroup } from '@/components/InputGroup';
+import { Input } from '@/components/InputGroup/Input';
+import { InputLeftElement } from '@/components/InputGroup/InputLeftElement';
 
 import './style.css';
 

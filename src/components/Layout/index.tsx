@@ -3,12 +3,16 @@ import { Outlet } from 'react-router-dom';
 
 import { Header } from '@/components/Header';
 
+import './style.css';
+
 export class Layout extends Component {
   render() {
     return (
       <>
         <Header />
-        <Outlet />
+        <main>
+          <Outlet />
+        </main>
       </>
     );
   }
