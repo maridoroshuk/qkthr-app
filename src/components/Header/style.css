@@ -10,7 +10,29 @@
 }
 
 .nav-link a {
+  color: var(--white);
   font-size: clamp(1.5rem, 2.5vw, 2rem);
-  color: var(--main-yellow);
   text-decoration: none;
+}
+
+.nav-link a.active {
+  color: var(--main-yellow);
+}
+
+.nav-link a:after {
+  content: '';
+  width: 0;
+  height: 0.15rem;
+  display: block;
+  background-color: var(--main-yellow);
+  transition-duration: 300ms;
+  margin-top: 0.1rem;
+}
+
+.nav-link a:hover:after {
+  width: 100%;
+}
+
+.nav-link a.active:after {
+  width: 100%;
 }
