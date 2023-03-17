@@ -11,7 +11,6 @@ import { cards } from '@/mock/cards';
 import './style.css';
 
 export class CardList extends Component {
-  handleLinkButtonClick = () => {};
   render() {
     return (
       <div className="cards-container">
@@ -25,7 +24,7 @@ export class CardList extends Component {
                 <p>{body}</p>
               </CardContent>
               <CardActions>
-                <ButtonWithIcon icon={Link} onButtonClick={this.handleLinkButtonClick}>
+                <ButtonWithIcon icon={Link}>
                   <a className="icon-button-link" target="_blank" href={link} rel="noreferrer">
                     Open in Rijksmuseum
                   </a>

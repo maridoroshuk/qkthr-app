@@ -1,17 +1,25 @@
 .nav-container {
+  color: var(--white);
   height: 100px;
   background-color: var(--main-blue);
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: clamp(1rem, 2.5vw, 2rem);
+  gap: clamp(3rem, 2.5vw, 8rem);
   padding: 1rem;
+}
+
+.nav-container ul {
   list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(1rem, 2.5vw, 2rem);
 }
 
 .nav-link a {
   color: var(--white);
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
   text-decoration: none;
 }
 
@@ -22,7 +30,7 @@
 .nav-link a:after {
   content: '';
   width: 0;
-  height: 0.15rem;
+  height: 0.1rem;
   display: block;
   background-color: var(--main-yellow);
   transition-duration: 300ms;
@@ -35,4 +43,9 @@
 
 .nav-link a.active:after {
   width: 100%;
+}
+
+.app-name {
+  margin: 1rem;
+  font-size: clamp(2rem, 2.5vw, 3rem);
 }
