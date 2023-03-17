@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRouteError } from 'react-router';
+import { isRouteErrorResponse, useRouteError } from 'react-router';
 
 import './style.css';
 
@@ -7,13 +7,13 @@ export function ErrorPage() {
   const error = useRouteError();
   console.error(error);
 
-  return (
-    <div id="error-page">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
+  if (isRouteErrorResponse(error)) {
+    return (
       <p>
-        <i>{error.statusText || error.message}</i>
+        {error.status} {error.statusText}
       </p>
-    </div>
-  );
+    );
+  }
+
+  return <p>Unknown Error</p>;
 }
