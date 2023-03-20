@@ -1,0 +1,11 @@
+.input-container {
+  max-width: 40rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.5rem 1rem;
+  margin: 1rem auto;
+  border: 0.2rem solid var(--main-blue);
+  border-radius: 2rem;
+}
