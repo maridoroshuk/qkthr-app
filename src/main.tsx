@@ -7,6 +7,8 @@ import { About } from '@/pages/About';
 import { ErrorPage } from '@/pages/ErrorPage';
 import { Home } from '@/pages/Home';
 
+import { FormPage } from './pages/FormPage';
+
 import './index.css';
 
 const router = createBrowserRouter([
@@ -20,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: '/about',
         element: <About />,
+      },
+      {
+        path: '/form',
+        element: <FormPage />,
       },
     ],
   },

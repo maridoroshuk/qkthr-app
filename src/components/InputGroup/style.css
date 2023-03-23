@@ -6,6 +6,6 @@
   justify-content: flex-start;
   padding: 0.5rem 1rem;
   margin: 1rem auto;
-  border: 0.2rem solid var(--main-blue);
-  border-radius: 2rem;
+  border: 0.1rem solid var(--main-blue);
+  border-radius: 1rem;
 }
