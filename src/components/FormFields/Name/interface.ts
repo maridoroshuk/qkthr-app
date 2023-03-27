@@ -1,3 +1,6 @@
+import { ChangeEvent } from 'react';
+
 export interface INameProps {
-  onNameChange: (value: string) => void;
+  name: string;
+  onNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }

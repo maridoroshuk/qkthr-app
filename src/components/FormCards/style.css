@@ -1,0 +1,9 @@
+.pet-list {
+  margin-left: 1rem;
+}
+
+.card-second-heading {
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  font-weight: 400;
+  font-style: italic;
+}

@@ -9,13 +9,19 @@ import { IBirthdayProps } from './interface';
 
 export class Birthday extends Component<IBirthdayProps> {
   render() {
-    const { onBirthdayChange } = this.props;
+    const { birthday, onBirthdayChange } = this.props;
 
     return (
       <FormControl>
         <FormLabel htmlFor="date">Birthday</FormLabel>
         <InputGroup>
-          <DateInput id="date" name="date" localStorageKey="birthday" onChange={onBirthdayChange} />
+          <DateInput
+            value={birthday}
+            id="date"
+            name="date"
+            localStorageKey="birthday"
+            onChange={onBirthdayChange}
+          />
         </InputGroup>
       </FormControl>
     );

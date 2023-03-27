@@ -1,13 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IFormProps {}
-
+export interface IFormProps {
+  onAddCard: (card: IFormCard) => void;
+}
 export interface IFormState {
-  formData: {
-    name: string;
-    birthday: string;
-    country: string;
-    petList: IPet[];
-    gender: string;
-    image: string;
-  };
+  formData: IFormCard;
 }

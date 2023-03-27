@@ -8,12 +8,13 @@ import { INameProps } from './interface';
 
 export class Name extends Component<INameProps> {
   render() {
-    const { onNameChange } = this.props;
+    const { name, onNameChange } = this.props;
 
     return (
       <InputGroup>
         <FormLabel htmlFor="name" />
         <TextInput
+          value={name}
           placeholder="Enter your name"
           id="name"
           name="name"

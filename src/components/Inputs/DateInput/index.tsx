@@ -2,21 +2,12 @@ import React, { ChangeEvent, Component } from 'react';
 
 import withLocalStorage from '@/hoc/withLocalStorage';
 
-import { IDateInputState, TDateInputProps } from './interface';
+import { TDateInputProps } from './interface';
 
 import './style.css';
 
-class DateInputComponent extends Component<TDateInputProps, IDateInputState> {
-  constructor(props: TDateInputProps) {
-    super(props);
-    this.state = {
-      value: this.props.cachedValue || '',
-    };
-  }
-
+class DateInputComponent extends Component<TDateInputProps> {
   handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ value: e.target.value });
-
     this.props.onChange(e.target.value);
 
     if (this.props.onStorageSave) {
@@ -25,13 +16,12 @@ class DateInputComponent extends Component<TDateInputProps, IDateInputState> {
   };
 
   render() {
-    const { name, id } = this.props;
-    const { value } = this.state;
+    const { name, id, value, cachedValue } = this.props;
 
     return (
       <input
         className="date-input"
-        value={value}
+        value={cachedValue || value}
         onChange={this.handleInputChange}
         type="date"
         id={id}

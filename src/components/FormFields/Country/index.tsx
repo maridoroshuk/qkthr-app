@@ -10,13 +10,14 @@ import { ICountryProps } from './interface';
 
 export class Country extends Component<ICountryProps> {
   render() {
-    const { onCountryChange } = this.props;
+    const { country, onCountryChange } = this.props;
 
     return (
       <FormControl>
         <FormLabel htmlFor="gender">Country</FormLabel>
         <InputGroup>
           <Select
+            value={country}
             options={countries}
             id="country"
             name="country"

@@ -7,7 +7,6 @@ import { GenderList } from '@/components/FormFields/GenderList';
 import { Name } from '@/components/FormFields/Name';
 import { PetList } from '@/components/FormFields/PetList';
 import { UploadImage } from '@/components/Inputs/UploadImage';
-import { pets } from '@/mock/pets';
 import { filterByChecked } from '@/utils/filterByChecked';
 
 import { IFormProps, IFormState } from './interface';
@@ -20,13 +19,13 @@ export class Form extends Component<IFormProps, IFormState> {
       name: '',
       birthday: '',
       country: '',
-      petList: [...pets],
+      petList: [],
       gender: '',
       image: '',
     },
   };
 
-  handleNameChange = (value: string) => {
+  handleNameChange = (e: string) => {
     this.setState(({ formData }: IFormState) => ({
       formData: { ...formData, name: value },
     }));
@@ -34,7 +33,7 @@ export class Form extends Component<IFormProps, IFormState> {
 
   handleBirthdayChange = (value: string) => {
     this.setState(({ formData }: IFormState) => ({
-      formData: { ...formData, birthday: value },
+      formData: { ...formData, birthday: new Date(value).toLocaleDateString() },
     }));
   };
 
@@ -65,15 +64,32 @@ export class Form extends Component<IFormProps, IFormState> {
 
   handleFormSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(this.state.formData);
+
+    const { formData } = this.state;
+    this.props.onAddCard(formData);
+
+    this.setState({
+      formData: {
+        name: '',
+        birthday: '',
+        country: '',
+        petList: [],
+        gender: '',
+        image: '',
+      },
+    });
   };
 
   render() {
+    const {
+      formData: { name, birthday, country },
+    } = this.state;
+
     return (
       <form className="form" onSubmit={this.handleFormSubmit}>
-        <Name onNameChange={this.handleNameChange} />
-        <Birthday onBirthdayChange={this.handleBirthdayChange} />
-        <Country onCountryChange={this.handleCountryChange} />
+        <Name name={name} onNameChange={this.handleNameChange} />
+        <Birthday birthday={birthday} onBirthdayChange={this.handleBirthdayChange} />
+        <Country country={country} onCountryChange={this.handleCountryChange} />
         <GenderList onGenderChange={this.handleGenderChange} />
         <PetList onPetsListChange={this.handlePetListChange} />
         <UploadImage onImageChange={this.handleImageChange} name="form-image" id="form-image" />

@@ -6,6 +6,7 @@ import { Card } from '@/components/Card';
 import { CardActions } from '@/components/Card/CardActions';
 import { CardContent } from '@/components/Card/CardContent';
 import { CardImage } from '@/components/Card/CardImage';
+import { CardsContainer } from '@/components/Card/CardsContainer';
 import { cards } from '@/mock/cards';
 
 import './style.css';
@@ -13,7 +14,7 @@ import './style.css';
 export class CardList extends Component {
   render() {
     return (
-      <div className="cards-container">
+      <CardsContainer>
         {cards.map(({ id, image, title, author, body, link }) => {
           return (
             <Card key={id}>
@@ -35,7 +36,7 @@ export class CardList extends Component {
             </Card>
           );
         })}
-      </div>
+      </CardsContainer>
     );
   }
 }

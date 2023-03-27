@@ -1,9 +1,9 @@
+import { ChangeEvent } from 'react';
+
 export type TTextInputProps = {
   placeholder: string;
   id: string;
   name: string;
-} & IInputProps;
-
-export interface ITextInputState {
   value: string;
-}
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
