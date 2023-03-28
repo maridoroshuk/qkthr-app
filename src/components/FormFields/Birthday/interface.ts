@@ -1,4 +1,6 @@
+import { ChangeEvent } from 'react';
+
 export interface IBirthdayProps {
   birthday: string;
-  onBirthdayChange: (value: string) => void;
+  onBirthdayChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }

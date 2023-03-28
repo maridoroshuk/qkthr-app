@@ -1,4 +1,6 @@
+import { ChangeEvent } from 'react';
+
 export interface ICountryProps {
   country: string;
-  onCountryChange: (value: string) => void;
+  onCountryChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }

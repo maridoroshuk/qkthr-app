@@ -1,32 +1,26 @@
 import React, { ChangeEvent, Component } from 'react';
 
-import withLocalStorage from '@/hoc/withLocalStorage';
-
 import { TSelectProps } from './interface';
 
 import './style.css';
 
-class SelectComponent extends Component<TSelectProps> {
+export class Select extends Component<TSelectProps> {
   handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    this.props.onChange(e.target.value);
-
-    if (this.props.onStorageSave) {
-      this.props.onStorageSave(e.target.value);
-    }
+    this.props.onChange(e);
   };
 
   render() {
-    const { name, id, options, value, cachedValue } = this.props;
+    const { name, id, options, value } = this.props;
 
     return (
       <select
         className="select"
         onChange={this.handleSelectChange}
-        value={cachedValue || value}
+        value={value}
         id={id}
         name={name}
       >
-        {options.map(({ id, value, text }) => (
+        {options.map(({ id, value, text }: ICountry) => (
           <option key={id} value={value}>
             {text}
           </option>
@@ -35,5 +29,3 @@ class SelectComponent extends Component<TSelectProps> {
     );
   }
 }
-
-export const Select = withLocalStorage(SelectComponent);

@@ -21,7 +21,7 @@ export class FormCards extends Component<IFormCardsProps> {
               <CardImage image={image} alt={name} />
               <CardContent>
                 <h3>{name}</h3>
-                <h6 className="card-second-heading">{birthday}</h6>
+                <h6 className="card-second-heading">{new Date(birthday).toLocaleDateString()}</h6>
                 <p>{gender}</p>
                 <p>{country}</p>
                 {petList.length > 0 && (

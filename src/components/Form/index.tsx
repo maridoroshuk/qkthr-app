@@ -7,7 +7,10 @@ import { GenderList } from '@/components/FormFields/GenderList';
 import { Name } from '@/components/FormFields/Name';
 import { PetList } from '@/components/FormFields/PetList';
 import { UploadImage } from '@/components/Inputs/UploadImage';
+import { validateForm } from '@/helpers/validation';
 import { filterByChecked } from '@/utils/filterByChecked';
+
+import ConfirmModal from '../Modals/ConfirmModal';
 
 import { IFormProps, IFormState } from './interface';
 
@@ -23,23 +26,24 @@ export class Form extends Component<IFormProps, IFormState> {
       gender: '',
       image: '',
     },
+    isSaved: false,
   };
 
-  handleNameChange = (e: string) => {
+  handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState(({ formData }: IFormState) => ({
-      formData: { ...formData, name: value },
+      formData: { ...formData, name: e.target.value },
     }));
   };
 
-  handleBirthdayChange = (value: string) => {
+  handleBirthdayChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState(({ formData }: IFormState) => ({
-      formData: { ...formData, birthday: new Date(value).toLocaleDateString() },
+      formData: { ...formData, birthday: e.target.value },
     }));
   };
 
-  handleCountryChange = (value: string) => {
+  handleCountryChange = (e: ChangeEvent<HTMLSelectElement>) => {
     this.setState(({ formData }: IFormState) => ({
-      formData: { ...formData, country: value },
+      formData: { ...formData, country: e.target.value },
     }));
   };
 
@@ -78,23 +82,37 @@ export class Form extends Component<IFormProps, IFormState> {
         image: '',
       },
     });
+
+    this.setState({ isSaved: true });
+  };
+
+  handlePortalClose = () => {
+    this.setState({ isSaved: false });
   };
 
   render() {
     const {
       formData: { name, birthday, country },
+      isSaved,
     } = this.state;
 
     return (
-      <form className="form" onSubmit={this.handleFormSubmit}>
-        <Name name={name} onNameChange={this.handleNameChange} />
-        <Birthday birthday={birthday} onBirthdayChange={this.handleBirthdayChange} />
-        <Country country={country} onCountryChange={this.handleCountryChange} />
-        <GenderList onGenderChange={this.handleGenderChange} />
-        <PetList onPetsListChange={this.handlePetListChange} />
-        <UploadImage onImageChange={this.handleImageChange} name="form-image" id="form-image" />
-        <Button type="submit">Submit</Button>
-      </form>
+      <>
+        <form className="form" onSubmit={this.handleFormSubmit}>
+          <Name name={name} onNameChange={this.handleNameChange} />
+          <Birthday birthday={birthday} onBirthdayChange={this.handleBirthdayChange} />
+          <Country country={country} onCountryChange={this.handleCountryChange} />
+          <GenderList onGenderChange={this.handleGenderChange} />
+          <PetList onPetsListChange={this.handlePetListChange} />
+          <UploadImage onImageChange={this.handleImageChange} name="form-image" id="form-image" />
+          <Button type="submit">Submit</Button>
+        </form>
+        {isSaved && (
+          <ConfirmModal onPortalClose={this.handlePortalClose}>
+            Data has been saved successfully!
+          </ConfirmModal>
+        )}
+      </>
     );
   }
 }

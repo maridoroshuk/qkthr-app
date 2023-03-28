@@ -1,4 +1,4 @@
-export const countries = [
+export const countries: ICountry[] = [
   { id: 0, value: '', text: '--Choose your country--' },
   { id: 1, value: 'United States', text: 'United States' },
   { id: 2, value: 'China', text: 'China' },

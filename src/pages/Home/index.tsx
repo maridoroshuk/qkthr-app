@@ -9,7 +9,7 @@ export class Home extends Component {
   render() {
     return (
       <>
-        <Searchbar localStorageKey="searchQuery" />
+        <Searchbar />
         <CardList />
       </>
     );

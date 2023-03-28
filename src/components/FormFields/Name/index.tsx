@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import { InputGroup } from '@/components/InputGroup';
 import { FormLabel } from '@/components/InputGroup/FormLabel';
@@ -6,7 +6,7 @@ import { TextInput } from '@/components/Inputs/TextInput';
 
 import { INameProps } from './interface';
 
-export class Name extends Component<INameProps> {
+export class Name extends PureComponent<INameProps> {
   render() {
     const { name, onNameChange } = this.props;
 
