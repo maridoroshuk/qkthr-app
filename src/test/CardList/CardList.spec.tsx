@@ -18,7 +18,7 @@ describe('CardList component', () => {
 
   it('renders correct passed cards data', async () => {
     render(<CardList />);
-    cards.forEach(({ id, title, author, body }) => {
+    cards.forEach(({ id, title, author }) => {
       expect(screen.getByTestId(`${id}-card-title`)).toHaveTextContent(title);
       expect(screen.getByTestId(`${id}-card-author`)).toHaveTextContent(author);
     });
