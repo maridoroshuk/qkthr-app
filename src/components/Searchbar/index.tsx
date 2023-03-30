@@ -43,7 +43,6 @@ export class Searchbar extends Component {
           name="search"
           value={query}
           onChange={this.handleSearchChange}
-          localStorageKey="searchQuery"
         />
       </InputGroup>
     );
