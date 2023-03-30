@@ -27,6 +27,14 @@ export class Form extends Component<IFormProps, IFormState> {
       image: '',
     },
     isSaved: false,
+    errors: {
+      nameError: '',
+      birthdayError: '',
+      countryError: '',
+      petListError: '',
+      genderError: '',
+      imageError: '',
+    },
   };
 
   handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -70,20 +78,29 @@ export class Form extends Component<IFormProps, IFormState> {
     e.preventDefault();
 
     const { formData } = this.state;
-    this.props.onAddCard(formData);
 
-    this.setState({
-      formData: {
-        name: '',
-        birthday: '',
-        country: '',
-        petList: [],
-        gender: '',
-        image: '',
-      },
-    });
+    const errors = validateForm(formData);
+    const hasError = Object.values(errors).some((value: string) => value.length > 0);
 
-    this.setState({ isSaved: true });
+    if (hasError) {
+      this.setState({
+        errors,
+      });
+    } else {
+      this.setState({
+        formData: {
+          name: '',
+          birthday: '',
+          country: '',
+          petList: [],
+          gender: '',
+          image: '',
+        },
+        isSaved: true,
+      });
+
+      this.props.onAddCard(formData);
+    }
   };
 
   handlePortalClose = () => {
@@ -94,17 +111,31 @@ export class Form extends Component<IFormProps, IFormState> {
     const {
       formData: { name, birthday, country },
       isSaved,
+      errors: { nameError, birthdayError, countryError, petListError, genderError, imageError },
     } = this.state;
 
     return (
       <>
         <form className="form" onSubmit={this.handleFormSubmit}>
-          <Name name={name} onNameChange={this.handleNameChange} />
-          <Birthday birthday={birthday} onBirthdayChange={this.handleBirthdayChange} />
-          <Country country={country} onCountryChange={this.handleCountryChange} />
-          <GenderList onGenderChange={this.handleGenderChange} />
-          <PetList onPetsListChange={this.handlePetListChange} />
-          <UploadImage onImageChange={this.handleImageChange} name="form-image" id="form-image" />
+          <Name name={name} onNameChange={this.handleNameChange} error={nameError} />
+          <Birthday
+            birthday={birthday}
+            onBirthdayChange={this.handleBirthdayChange}
+            error={birthdayError}
+          />
+          <Country
+            country={country}
+            onCountryChange={this.handleCountryChange}
+            error={countryError}
+          />
+          <GenderList onGenderChange={this.handleGenderChange} error={petListError} />
+          <PetList onPetsListChange={this.handlePetListChange} error={genderError} />
+          <UploadImage
+            onImageChange={this.handleImageChange}
+            name="form-image"
+            id="form-image"
+            error={imageError}
+          />
           <Button type="submit">Submit</Button>
         </form>
         {isSaved && (

@@ -1,12 +1,13 @@
 import React, { ChangeEvent, Component } from 'react';
 
 import { InputGroup } from '@/components/InputGroup';
+import { withError } from '@/hoc/withError';
 
 import { IUploadImageProps } from './interface';
 
 import './style.css';
 
-export class UploadImage extends Component<IUploadImageProps> {
+export class UploadImageComponent extends Component<IUploadImageProps> {
   constructor(props: IUploadImageProps) {
     super(props);
     this.state = {
@@ -31,6 +32,7 @@ export class UploadImage extends Component<IUploadImageProps> {
           <input
             name={name}
             id={id}
+            data-testid={id}
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.handleChange}
@@ -40,3 +42,5 @@ export class UploadImage extends Component<IUploadImageProps> {
     );
   }
 }
+
+export const UploadImage = withError(UploadImageComponent);

@@ -4,4 +4,5 @@ export interface IFormProps {
 export interface IFormState {
   formData: IFormCard;
   isSaved: boolean;
+  errors: IErrors;
 }

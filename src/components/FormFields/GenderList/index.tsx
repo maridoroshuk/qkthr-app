@@ -4,11 +4,12 @@ import { FormControl } from '@/components/FormControl';
 import { InputGroup } from '@/components/InputGroup';
 import { FormLabel } from '@/components/InputGroup/FormLabel';
 import { Switcher } from '@/components/Inputs/Switcher';
+import { withError } from '@/hoc/withError';
 import { genders } from '@/mock/genders';
 
 import { IGenderProps } from './interface';
 
-export class GenderList extends Component<IGenderProps> {
+export class GenderListComponent extends Component<IGenderProps> {
   state = {
     selectedId: null,
   };
@@ -40,3 +41,5 @@ export class GenderList extends Component<IGenderProps> {
     );
   }
 }
+
+export const GenderList = withError(GenderListComponent);

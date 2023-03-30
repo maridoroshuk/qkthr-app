@@ -4,10 +4,11 @@ import { FormControl } from '@/components/FormControl';
 import { InputGroup } from '@/components/InputGroup';
 import { FormLabel } from '@/components/InputGroup/FormLabel';
 import { DateInput } from '@/components/Inputs/DateInput';
+import { withError } from '@/hoc/withError';
 
 import { IBirthdayProps } from './interface';
 
-export class Birthday extends Component<IBirthdayProps> {
+export class BirthdayComponent extends Component<IBirthdayProps> {
   render() {
     const { birthday, onBirthdayChange } = this.props;
 
@@ -27,3 +28,5 @@ export class Birthday extends Component<IBirthdayProps> {
     );
   }
 }
+
+export const Birthday = withError(BirthdayComponent);

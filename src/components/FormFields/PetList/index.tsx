@@ -4,11 +4,12 @@ import { FormControl } from '@/components/FormControl';
 import { InputGroup } from '@/components/InputGroup';
 import { FormLabel } from '@/components/InputGroup/FormLabel';
 import { CheckBox } from '@/components/Inputs/Checkbox';
+import { withError } from '@/hoc/withError';
 import { pets } from '@/mock/pets';
 
 import { IPetListProps, IPetListState } from './interface';
 
-export class PetList extends Component<IPetListProps, IPetListState> {
+export class PetListComponent extends Component<IPetListProps, IPetListState> {
   constructor(props: IPetListProps) {
     super(props);
     this.state = {
@@ -53,3 +54,5 @@ export class PetList extends Component<IPetListProps, IPetListState> {
     );
   }
 }
+
+export const PetList = withError(PetListComponent);
