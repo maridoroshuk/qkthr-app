@@ -1,0 +1,8 @@
+.about-info {
+  max-width: 70rem;
+  width: 100%;
+  padding: 2rem;
+  margin: 0 auto;
+  text-align: center;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+}

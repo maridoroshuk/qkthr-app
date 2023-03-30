@@ -1,3 +1,10 @@
+html {
+  --white: #fff;
+  --main-blue: #26619c;
+  --main-yellow: #ffef00;
+  --main-cherry: #a31525;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,8 +13,8 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  height: 100%;
+  font-family: 'Corben', cursive;
 }
