@@ -5,7 +5,7 @@ import Tulpen from '@/assets/tulpen.jpg';
 
 import './style.css';
 
-export function ErrorPage() {
+export const ErrorPage = () => {
   const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {
@@ -25,4 +25,4 @@ export function ErrorPage() {
       </div>
     );
   }
-}
+};

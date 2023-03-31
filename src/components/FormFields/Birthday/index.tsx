@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 
 import { FormControl } from '@/components/FormControl';
 import { InputGroup } from '@/components/InputGroup';
@@ -8,25 +8,21 @@ import { withError } from '@/hoc/withError';
 
 import { IBirthdayProps } from './interface';
 
-export class BirthdayComponent extends Component<IBirthdayProps> {
-  render() {
-    const { birthday, onBirthdayChange } = this.props;
+const BirthdayComponent = ({ birthday, onBirthdayChange }: IBirthdayProps) => {
+  return (
+    <FormControl>
+      <FormLabel htmlFor="date">Birthday</FormLabel>
+      <InputGroup>
+        <DateInput
+          value={birthday}
+          id="date"
+          name="date"
+          localStorageKey="birthday"
+          onChange={onBirthdayChange}
+        />
+      </InputGroup>
+    </FormControl>
+  );
+};
 
-    return (
-      <FormControl>
-        <FormLabel htmlFor="date">Birthday</FormLabel>
-        <InputGroup>
-          <DateInput
-            value={birthday}
-            id="date"
-            name="date"
-            localStorageKey="birthday"
-            onChange={onBirthdayChange}
-          />
-        </InputGroup>
-      </FormControl>
-    );
-  }
-}
-
-export const Birthday = withError(BirthdayComponent);
+export const Birthday = memo(withError(BirthdayComponent));

@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { ICardProps } from './interface';
 
 import './style.css';
 
-export class Card extends Component<ICardProps> {
-  render() {
-    const { children } = this.props;
-
-    return (
-      <div className="card-container" data-testid="card">
-        {children}
-      </div>
-    );
-  }
-}
+export const Card = ({ children }: ICardProps) => {
+  return (
+    <div className="card-container" data-testid="card">
+      {children}
+    </div>
+  );
+};

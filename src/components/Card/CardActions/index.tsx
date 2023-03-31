@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { ICardActionsProps } from './interface';
 
 import './style.css';
 
-export class CardActions extends Component<ICardActionsProps> {
-  render() {
-    const { children } = this.props;
-
-    return <div className="card-actions">{children}</div>;
-  }
-}
+export const CardActions = ({ children }: ICardActionsProps) => {
+  return <div className="card-actions">{children}</div>;
+};

@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { IFormLabelProps } from './interface';
 
-export class FormLabel extends Component<IFormLabelProps> {
-  render() {
-    const { htmlFor, children } = this.props;
-    return <label htmlFor={htmlFor}>{children}</label>;
-  }
-}
+export const FormLabel = ({ htmlFor, children }: IFormLabelProps) => {
+  return <label htmlFor={htmlFor}>{children}</label>;
+};

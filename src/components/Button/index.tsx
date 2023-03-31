@@ -1,22 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import { IButton } from './interface';
+import { IButtonProps } from './interface';
 
 import './style.css';
 
-export class Button extends Component<IButton> {
-  render() {
-    const { children, type, onButtonClick } = this.props;
-
-    return (
-      <button
-        className="button"
-        data-testid="test-button"
-        type={type || 'button'}
-        onClick={onButtonClick}
-      >
-        {children}
-      </button>
-    );
-  }
-}
+export const Button = ({ children, type, onButtonClick }: IButtonProps) => {
+  return (
+    <button
+      className="button"
+      data-testid="test-button"
+      type={type || 'button'}
+      onClick={onButtonClick}
+    >
+      {children}
+    </button>
+  );
+};

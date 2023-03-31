@@ -1,6 +1,6 @@
 import React, { ComponentType } from 'react';
 
-import FormError from '@/components/FormError';
+import { FormError } from '@/components/FormError';
 
 export function withError<T extends { error: string }>(WrappedComponent: ComponentType<T>) {
   return function (props: T) {

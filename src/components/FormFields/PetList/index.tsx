@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component } from 'react';
+import React, { ChangeEvent, memo, useEffect, useState } from 'react';
 
 import { FormControl } from '@/components/FormControl';
 import { InputGroup } from '@/components/InputGroup';
@@ -7,52 +7,44 @@ import { CheckBox } from '@/components/Inputs/Checkbox';
 import { withError } from '@/hoc/withError';
 import { pets } from '@/mock/pets';
 
-import { IPetListProps, IPetListState } from './interface';
+import { IPetListProps } from './interface';
 
-export class PetListComponent extends Component<IPetListProps, IPetListState> {
-  constructor(props: IPetListProps) {
-    super(props);
-    this.state = {
-      petList: [...pets],
-    };
-  }
+const PetListComponent = ({ onPetsListChange }: IPetListProps) => {
+  const [petList, setPetList] = useState<IPet[]>([...pets]);
 
-  handleOnChange = (e: ChangeEvent<HTMLInputElement>, id: string) => {
+  useEffect(() => {
+    onPetsListChange(petList);
+  }, [onPetsListChange, petList]);
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>, id: string) => {
     const isChecked = e.target.checked;
-    const { petList } = this.state;
     const updatedPetList = petList.map((pet) => {
       return pet.id === id ? { ...pet, isChecked } : pet;
     });
 
-    this.setState({ petList: updatedPetList }, () => {
-      this.props.onPetsListChange(updatedPetList);
-    });
+    setPetList(updatedPetList);
   };
 
-  render() {
-    const { petList } = this.state;
+  return (
+    <InputGroup>
+      <FormControl>
+        <FormLabel htmlFor="pets">Choose your favorite pet/s</FormLabel>
+        {petList.map(({ id, value, isChecked }) => {
+          return (
+            <CheckBox
+              key={id}
+              checked={isChecked}
+              id={id}
+              name={value}
+              htmlFor={value}
+              label={value}
+              onChange={handleOnChange}
+            />
+          );
+        })}
+      </FormControl>
+    </InputGroup>
+  );
+};
 
-    return (
-      <InputGroup>
-        <FormControl>
-          <FormLabel htmlFor="pets">Choose your favorite pet/s</FormLabel>
-          {petList.map(({ id, value, isChecked }) => {
-            return (
-              <CheckBox
-                key={id}
-                checked={isChecked}
-                id={id}
-                name={value}
-                htmlFor={value}
-                label={value}
-                onChange={this.handleOnChange}
-              />
-            );
-          })}
-        </FormControl>
-      </InputGroup>
-    );
-  }
-}
-
-export const PetList = withError(PetListComponent);
+export const PetList = memo(withError(PetListComponent));

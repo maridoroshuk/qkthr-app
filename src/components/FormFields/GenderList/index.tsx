@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { memo, useState } from 'react';
 
 import { FormControl } from '@/components/FormControl';
 import { InputGroup } from '@/components/InputGroup';
@@ -9,37 +9,32 @@ import { genders } from '@/mock/genders';
 
 import { IGenderProps } from './interface';
 
-export class GenderListComponent extends Component<IGenderProps> {
-  state = {
-    selectedId: null,
+const GenderListComponent = ({ onGenderChange }: IGenderProps) => {
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+
+  const handleOnChange = (id: number, value: string) => {
+    setSelectedId(id);
+    onGenderChange(value);
   };
 
-  handleOnChange = (id: number, value: string) => {
-    this.setState({ selectedId: id });
-    this.props.onGenderChange(value);
-  };
+  return (
+    <InputGroup>
+      <FormControl>
+        <FormLabel htmlFor="pets">Gender</FormLabel>
+        {genders.map(({ id, value }) => {
+          return (
+            <Switcher
+              key={id}
+              checked={id === selectedId}
+              name={value}
+              value={value}
+              onChange={() => handleOnChange(id, value)}
+            />
+          );
+        })}
+      </FormControl>
+    </InputGroup>
+  );
+};
 
-  render() {
-    const { selectedId } = this.state;
-    return (
-      <InputGroup>
-        <FormControl>
-          <FormLabel htmlFor="pets">Gender</FormLabel>
-          {genders.map(({ id, value }) => {
-            return (
-              <Switcher
-                key={id}
-                checked={id === selectedId}
-                name={value}
-                value={value}
-                onChange={() => this.handleOnChange(id, value)}
-              />
-            );
-          })}
-        </FormControl>
-      </InputGroup>
-    );
-  }
-}
-
-export const GenderList = withError(GenderListComponent);
+export const GenderList = memo(withError(GenderListComponent));

@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { CardList } from '@/components/CardList';
 import { Searchbar } from '@/components/Searchbar';
 
 import './style.css';
 
-export class Home extends Component {
-  render() {
-    return (
-      <>
-        <Searchbar />
-        <CardList />
-      </>
-    );
-  }
-}
+export const Home = () => {
+  return (
+    <>
+      <Searchbar />
+      <CardList />
+    </>
+  );
+};

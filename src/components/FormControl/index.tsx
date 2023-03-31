@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { IFormControlProps } from './interface';
 
 import './style.css';
 
-export class FormControl extends Component<IFormControlProps> {
-  render() {
-    const { children } = this.props;
-    return <div className="form-control-container">{children}</div>;
-  }
-}
+export const FormControl = ({ children }: IFormControlProps) => {
+  return <div className="form-control-container">{children}</div>;
+};
