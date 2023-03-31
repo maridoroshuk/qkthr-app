@@ -26,7 +26,6 @@ describe('Birthday component', () => {
     );
     const input = screen.getByDisplayValue('2022-01-01');
     fireEvent.change(input, { target: { value: '2023-01-01' } });
-    return { ...state, gender: action.payload };
   });
 
   it('should show error message when the date is empty', () => {
