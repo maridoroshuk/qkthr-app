@@ -1,7 +1,6 @@
-import { ChangeEvent } from 'react';
+import { TRegister } from '@/@types/register';
 
 export interface IBirthdayProps {
-  birthday: string;
-  error: string;
-  onBirthdayChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  register: TRegister;
+  error: string | undefined;
 }

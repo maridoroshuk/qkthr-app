@@ -7,17 +7,11 @@ import { withError } from '@/hoc/withError';
 
 import { INameProps } from './interface';
 
-const NameComponent = ({ name, onNameChange }: INameProps) => {
+const NameComponent = ({ register }: INameProps) => {
   return (
     <InputGroup>
       <FormLabel htmlFor="name" />
-      <TextInput
-        value={name}
-        placeholder="Enter your name"
-        id="name"
-        name="name"
-        onChange={onNameChange}
-      />
+      <TextInput name="name" placeholder="Enter your name" id="name" register={register} />
     </InputGroup>
   );
 };

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, memo, useEffect, useState } from 'react';
+import React, { memo } from 'react';
 
 import { FormControl } from '@/components/FormControl';
 import { InputGroup } from '@/components/InputGroup';
@@ -9,36 +9,20 @@ import { pets } from '@/mock/pets';
 
 import { IPetListProps } from './interface';
 
-const PetListComponent = ({ onPetsListChange }: IPetListProps) => {
-  const [petList, setPetList] = useState<IPet[]>([...pets]);
-
-  useEffect(() => {
-    onPetsListChange(petList);
-  }, [onPetsListChange, petList]);
-
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>, id: string) => {
-    const isChecked = e.target.checked;
-    const updatedPetList = petList.map((pet) => {
-      return pet.id === id ? { ...pet, isChecked } : pet;
-    });
-
-    setPetList(updatedPetList);
-  };
-
+const PetListComponent = ({ register }: IPetListProps) => {
   return (
     <InputGroup>
       <FormControl>
         <FormLabel htmlFor="pets">Choose your favorite pet/s</FormLabel>
-        {petList.map(({ id, value, isChecked }) => {
+        {pets.map(({ id, value }) => {
           return (
             <CheckBox
               key={id}
-              checked={isChecked}
               id={id}
-              name={value}
+              name="petList"
               htmlFor={value}
               label={value}
-              onChange={handleOnChange}
+              register={register}
             />
           );
         })}

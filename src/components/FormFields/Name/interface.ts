@@ -1,7 +1,6 @@
-import { ChangeEvent } from 'react';
+import { TRegister } from '@/@types/register';
 
 export interface INameProps {
-  name: string;
-  error: string;
-  onNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  register: TRegister;
+  error: string | undefined;
 }

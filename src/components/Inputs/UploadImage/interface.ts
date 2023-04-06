@@ -1,6 +1,8 @@
+import { TRegister } from '@/@types/register';
+
 export interface IUploadImageProps {
   id: string;
   name: string;
-  error: string;
-  onImageChange: (value: string) => void;
+  register: TRegister;
+  error: string | undefined;
 }

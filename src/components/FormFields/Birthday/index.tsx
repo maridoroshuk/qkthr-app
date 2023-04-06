@@ -8,18 +8,12 @@ import { withError } from '@/hoc/withError';
 
 import { IBirthdayProps } from './interface';
 
-const BirthdayComponent = ({ birthday, onBirthdayChange }: IBirthdayProps) => {
+const BirthdayComponent = ({ register }: IBirthdayProps) => {
   return (
     <FormControl>
       <FormLabel htmlFor="date">Birthday</FormLabel>
       <InputGroup>
-        <DateInput
-          value={birthday}
-          id="date"
-          name="date"
-          localStorageKey="birthday"
-          onChange={onBirthdayChange}
-        />
+        <DateInput id="date" name="birthday" register={register} />
       </InputGroup>
     </FormControl>
   );

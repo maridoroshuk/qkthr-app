@@ -1,9 +1,7 @@
-import { ChangeEvent } from 'react';
+import { TRegister } from '@/@types/register';
 
 export type TDateInputProps = {
   id: string;
   name: string;
-  localStorageKey: string;
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  register: TRegister;
 };

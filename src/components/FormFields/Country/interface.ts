@@ -1,7 +1,6 @@
-import { ChangeEvent } from 'react';
+import { TRegister } from '@/@types/register';
 
 export interface ICountryProps {
-  country: string;
-  error: string;
-  onCountryChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  register: TRegister;
+  error: string | undefined;
 }

@@ -9,19 +9,12 @@ import { countries } from '@/mock/countries';
 
 import { ICountryProps } from './interface';
 
-const CountryComponent = ({ country, onCountryChange }: ICountryProps) => {
+const CountryComponent = ({ register }: ICountryProps) => {
   return (
     <FormControl>
       <FormLabel htmlFor="gender">Country</FormLabel>
       <InputGroup>
-        <Select
-          value={country}
-          options={countries}
-          id="country"
-          name="country"
-          localStorageKey="country"
-          onChange={onCountryChange}
-        />
+        <Select options={countries} id="country" name="country" register={register} />
       </InputGroup>
     </FormControl>
   );

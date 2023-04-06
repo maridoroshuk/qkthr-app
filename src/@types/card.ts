@@ -11,7 +11,7 @@ interface IFormCard {
   name: string;
   birthday: string;
   country: string;
-  petList: IPet[];
+  petList: string[];
   gender: string;
   image: string;
 }

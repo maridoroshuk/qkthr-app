@@ -14,7 +14,7 @@ export const FormCards = ({ formCardList }: IFormCardsProps) => {
     <CardsContainer>
       {formCardList.map(({ name, birthday, country, petList, gender, image }) => {
         return (
-          <Card key={self.crypto.randomUUID()}>
+          <Card key={`${name}-${self.crypto.randomUUID()}`}>
             <CardImage image={image} alt={name} />
             <CardContent>
               <h3>{name}</h3>
@@ -25,8 +25,8 @@ export const FormCards = ({ formCardList }: IFormCardsProps) => {
                 <>
                   <p>Favorite pets</p>
                   <ul className="pet-list">
-                    {petList.map(({ value, id }) => {
-                      return <li key={id}>{value}</li>;
+                    {petList.map((pet) => {
+                      return <li key={`${pet}-${self.crypto.randomUUID()}`}>{pet}</li>;
                     })}
                   </ul>
                 </>

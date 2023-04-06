@@ -1,4 +1,6 @@
+import { TRegister } from '@/@types/register';
+
 export interface IPetListProps {
-  error: string;
-  onPetsListChange: (data: IPet[]) => void;
+  register: TRegister;
+  error: string | undefined;
 }

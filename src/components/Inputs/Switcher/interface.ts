@@ -1,6 +1,8 @@
+import { TRegister } from '@/@types/register';
+
 export interface ISwitcherProps {
   name: string;
-  checked: boolean;
+  id: number | string;
   value: string;
-  onChange: () => void;
+  register: TRegister;
 }

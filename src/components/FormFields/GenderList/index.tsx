@@ -9,28 +9,13 @@ import { genders } from '@/mock/genders';
 
 import { IGenderProps } from './interface';
 
-const GenderListComponent = ({ onGenderChange }: IGenderProps) => {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-
-  const handleOnChange = (id: number, value: string) => {
-    setSelectedId(id);
-    onGenderChange(value);
-  };
-
+const GenderListComponent = ({ register }: IGenderProps) => {
   return (
     <InputGroup>
       <FormControl>
         <FormLabel htmlFor="pets">Gender</FormLabel>
         {genders.map(({ id, value }) => {
-          return (
-            <Switcher
-              key={id}
-              checked={id === selectedId}
-              name={value}
-              value={value}
-              onChange={() => handleOnChange(id, value)}
-            />
-          );
+          return <Switcher key={id} id={id} name="gender" value={value} register={register} />;
         })}
       </FormControl>
     </InputGroup>

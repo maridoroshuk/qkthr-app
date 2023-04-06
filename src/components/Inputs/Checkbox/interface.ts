@@ -1,10 +1,9 @@
-import { ChangeEvent } from 'react';
+import { TRegister } from '@/@types/register';
 
 export interface ICheckBoxProps {
   id: string;
   name: string;
-  checked: boolean;
   htmlFor: string;
   label: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>, id: string) => void;
+  register: TRegister;
 }

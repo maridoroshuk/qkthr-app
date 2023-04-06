@@ -1,9 +1,8 @@
-import { ChangeEvent } from 'react';
+import { TRegister } from '@/@types/register';
 
 export type TTextInputProps = {
   placeholder: string;
   id: string;
   name: string;
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  register: TRegister;
 };

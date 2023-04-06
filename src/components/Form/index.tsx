@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/Button';
 import { Birthday } from '@/components/FormFields/Birthday';
@@ -8,124 +9,65 @@ import { Name } from '@/components/FormFields/Name';
 import { PetList } from '@/components/FormFields/PetList';
 import { UploadImage } from '@/components/Inputs/UploadImage';
 import { ConfirmModal } from '@/components/Modals/ConfirmModal';
-import { validateForm } from '@/helpers/validation';
-import { filterByChecked } from '@/utils/filterByChecked';
+import { formSchema } from '@/helpers/formValidationShema';
+import { transformErrors } from '@/helpers/transformErrors';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import * as actions from './actions';
-import { IFormProps, TFormDataAction } from './interface';
+import { IFormProps } from './interface';
 
 import './style.css';
 
-const initialFormDataState = {
+const initialErrorsState = {
   name: '',
   birthday: '',
   country: '',
-  petList: [],
+  petList: '',
   gender: '',
   image: '',
 };
 
-const initialErrorsState = {
-  nameError: '',
-  birthdayError: '',
-  countryError: '',
-  petListError: '',
-  genderError: '',
-  imageError: '',
-};
-
-function formDataReducer(state: IFormCard, action: TFormDataAction): IFormCard {
-  switch (action.type) {
-    case actions.UPDATE_NAME:
-      return { ...state, name: action.payload };
-    case actions.UPDATE_BIRTHDAY:
-      return { ...state, birthday: action.payload };
-    case actions.UPDATE_COUNTRY:
-      return { ...state, country: action.payload };
-    case actions.UPDATE_PETLIST:
-      return { ...state, petList: action.payload };
-    case actions.UPDATE_GENDER:
-      return { ...state, gender: action.payload };
-    case actions.UPDATE_IMAGE:
-      return { ...state, image: action.payload };
-    case actions.RESET_FORM:
-      return initialFormDataState;
-    default:
-      return state;
-  }
-}
-
 export const Form = ({ onAddCard }: IFormProps) => {
-  const [formData, dispatchFormData] = useReducer(formDataReducer, initialFormDataState);
-  const [errors, setErrors] = useState<IErrors>(initialErrorsState);
   const [isSaved, setIsSaved] = useState(false);
+  const [formErrors, setFormErrors] = useState<IErrors>(initialErrorsState);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IFormCard>({
+    resolver: yupResolver(formSchema),
+  });
 
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatchFormData({ type: actions.UPDATE_NAME, payload: e.target.value });
-  };
+  useEffect(() => {
+    const transformedErrors = transformErrors(errors);
+    setFormErrors(transformedErrors);
+  }, [errors]);
 
-  const handleBirthdayChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatchFormData({ type: actions.UPDATE_BIRTHDAY, payload: e.target.value });
-  };
+  const { name, birthday, country, petList, gender, image } = formErrors;
 
-  const handleCountryChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    dispatchFormData({ type: actions.UPDATE_COUNTRY, payload: e.target.value });
-  };
+  const onSubmit = (data: IFormCard) => {
+    setIsSaved(true);
+    setFormErrors(initialErrorsState);
 
-  const handlePetListChange = (data: IPet[]) => {
-    const selectedPets = filterByChecked(data);
-    dispatchFormData({ type: actions.UPDATE_PETLIST, payload: selectedPets });
-  };
-
-  const handleGenderChange = (value: string) => {
-    dispatchFormData({ type: actions.UPDATE_GENDER, payload: value });
-  };
-
-  const handleImageChange = (value: string) => {
-    dispatchFormData({ type: actions.UPDATE_IMAGE, payload: value });
-  };
-
-  const handleFormSubmit = (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const errors = validateForm(formData);
-    const hasError = Object.values(errors).some((value: string) => value.length > 0);
-
-    if (hasError) {
-      setErrors(errors);
-    } else {
-      dispatchFormData({ type: actions.RESET_FORM });
-      setIsSaved(true);
-      setErrors(initialErrorsState);
-
-      onAddCard(formData);
-    }
+    console.log(data);
+    onAddCard({ ...data, image: URL.createObjectURL(data.image[0] as unknown as Blob) });
+    reset();
   };
 
   const handlePortalClose = () => {
     setIsSaved(false);
   };
 
-  const { nameError, birthdayError, countryError, petListError, genderError, imageError } = errors;
-  const { name, birthday, country } = formData;
-
+  console.log(formErrors);
   return (
     <>
-      <form className="form" onSubmit={handleFormSubmit}>
-        <Name name={name} onNameChange={handleNameChange} error={nameError} />
-        <Birthday
-          birthday={birthday}
-          onBirthdayChange={handleBirthdayChange}
-          error={birthdayError}
-        />
-        <Country country={country} onCountryChange={handleCountryChange} error={countryError} />
-        <GenderList onGenderChange={handleGenderChange} error={petListError} />
-        <PetList onPetsListChange={handlePetListChange} error={genderError} />
-        <UploadImage
-          onImageChange={handleImageChange}
-          name="form-image"
-          id="form-image"
-          error={imageError}
-        />
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <Name register={register} error={name} />
+        <Birthday register={register} error={birthday} />
+        <Country register={register} error={country} />
+        <GenderList register={register} error={gender} />
+        <PetList register={register} error={petList} />
+        <UploadImage register={register} name="image" id="image" error={image} />
         <Button type="submit">Submit</Button>
       </form>
       {isSaved && (

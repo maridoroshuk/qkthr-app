@@ -1,10 +1,8 @@
-import { ChangeEvent } from 'react';
+import { TRegister } from '@/@types/register';
 
 export type TSelectProps = {
   id: string;
   name: string;
-  localStorageKey: string;
   options: ICountry[];
-  value: string;
-  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  register: TRegister;
 };

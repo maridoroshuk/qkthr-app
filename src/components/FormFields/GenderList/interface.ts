@@ -1,4 +1,6 @@
+import { TRegister } from '@/@types/register';
+
 export interface IGenderProps {
-  error: string;
-  onGenderChange: (value: string) => void;
+  register: TRegister;
+  error: string | undefined;
 }

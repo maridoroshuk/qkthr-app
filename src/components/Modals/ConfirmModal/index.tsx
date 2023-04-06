@@ -11,7 +11,7 @@ import './style.css';
 export const ConfirmModal = ({ children, onPortalClose }: IConfirmModalProps) => {
   return (
     <Portal onPortalClose={onPortalClose}>
-      <ModalContainer>
+      <ModalContainer onPortalClose={onPortalClose}>
         <img src={Checkmark} className="checkmark" alt="done" />
         {children}
       </ModalContainer>
